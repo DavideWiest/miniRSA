@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("miniRSA")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58f10deb9866ec1e25913672d3c345a544f5c581")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("miniRSA")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("miniRSA")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]

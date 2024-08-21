@@ -1,0 +1,82 @@
+
+// gcd with accumulator - for finding multiplicative inverse with euclidean algorithm - chose a simpler version
+
+type gdcAccItem = BigInteger * BigInteger * BigInteger
+type gdcAcc = gdcAccItem list
+
+let rec gcdWithAcc a b acc =
+    if b = BigInteger.Zero then acc else 
+    
+    let rem = a % b
+    let accItem = (a / b, a, rem)
+    gcdWithAcc b rem (accItem::acc)
+
+// inefficient implementation
+
+let moduleInverseFinder a b =
+    if a < b then failwith "First argument should be greater than the second one"
+
+    let remainder = gcd a b
+
+    if remainder <> BigInteger.One then failwith "The two numbers are not coprime"
+
+    let rec findModuleInverse classMul aMul =
+        printfn "%s * %s + %s * %s = %s" (classMul.ToString()) (b.ToString()) (aMul.ToString()) (a.ToString()) (((classMul * b) + (aMul * a)).ToString())
+        match classMul * b + aMul * a with
+        | n when n = BigInteger.One -> aMul
+        | n when n > BigInteger.One -> findModuleInverse classMul (aMul - BigInteger.One - ((n-a) / a))
+        | n when n < BigInteger.One -> findModuleInverse (classMul + BigInteger.One) aMul
+        | _ -> failwith "Unexpected pattern match"
+
+    findModuleInverse BigInteger.One BigInteger.Zero
+
+// painfully slow, doesnt even work
+
+let primeGenerator () =
+    let lowerLimit = BigInteger 1_000_000
+    let isPrime prevPrimes = fun n -> prevPrimes |> Seq.forall (fun p -> n % p <> BigInteger.Zero)
+
+    let rec findPrime prevPrimes n =
+        match (isPrime prevPrimes n, n > lowerLimit) with
+        | true, true -> n
+        | true, false -> findPrime (n::prevPrimes) (n + BigInteger.One)
+        | false, _ -> findPrime prevPrimes (n + BigInteger.One)
+
+    findPrime [] BigInteger.One
+
+// works only if m is prime
+
+let rec moduleInverseFinder m a =
+    if a <= BigInteger.One then a
+    else m - ((m / a) * (moduleInverseFinder (m % a) m)) % m
+
+// always returns the input number b    
+
+let moduleInverseFinder' a b =
+    if a < b then failwith "First argument should be greater than the second one"
+
+    let (accBefore, remainder) = gcdWithAcc a b [] 
+
+    if remainder <> BigInteger.One then failwith "The two numbers are not coprime - no module inverse exists"
+
+    let acc = 
+        accBefore
+        |> List.tail
+        |> List.map (fun (a,b,c,d) ->
+            (a,-b,c)
+        )
+
+    let start = acc.Head |> fun (a,b,c) -> (BigInteger.One,a,b,c)
+
+    let result = 
+        acc.Tail |> List.fold (fun (a1: BigInteger,b1,c1,_) (a2,b2,_) ->
+            // 1 = a1 * b1 - c1 * d1
+            // d1 = b2 - c2 * d2
+            // a1 * b1 - c1 * (b2 - c2 * d2)
+            // result:
+            // -c1 * b2 + (a1-c1*-c2) * b1
+            (c1, a2, a1+c1*b2, b1)
+        ) start
+
+    let result' = result |> fun (_,_,a,_) -> a
+    if result' < BigInteger.Zero then result' + a else result'

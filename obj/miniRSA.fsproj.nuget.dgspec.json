@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj": {}
+    "C:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj": {}
   },
   "projects": {
-    "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj": {
+    "C:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj",
+        "projectUniqueName": "C:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj",
         "projectName": "miniRSA",
-        "projectPath": "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj",
+        "projectPath": "C:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj",
         "packagesPath": "C:\\Users\\DavWi\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\obj\\",
+        "outputPath": "C:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DavWi\\AppData\\Roaming\\NuGet\\NuGet.Config",
