@@ -32,7 +32,7 @@ let testWithString (message: string) =
 //testWithString "Hello, world!"
 
 let measureTimeOfModuleInverseFinder = 
-    let eulerNAndEPairs = List.init 1000 (fun _ -> 
+    let eulerNAndEPairs = List.init 10 (fun _ -> 
         let randomLowerLimit = fun () -> System.Random().Next(10, 1_000)
         let size = 2_000
         let p,q = primeGenerator (randomLowerLimit()) size, primeGenerator (randomLowerLimit()) size

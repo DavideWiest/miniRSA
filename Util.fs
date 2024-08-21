@@ -37,24 +37,6 @@ let coprimeNumFinder n =
 
     findCoprime ((n - BigInteger.One) / BigInteger 2)
 
-let moduleInverseFinderSlow M a =
-    if M < a then failwith "First argument should be greater than the second one"
-
-    let remainder = gcd M a
-
-    if remainder <> BigInteger.One then failwith "The two numbers are not coprime"
-
-    let rec findModuleInverse classMul aMul =
-        match classMul * M + aMul * a with
-        | n when n = BigInteger.One -> aMul
-        | n when n > BigInteger.One -> findModuleInverse classMul (aMul - BigInteger.One)
-        | n when n < BigInteger.One -> findModuleInverse (classMul + BigInteger.One) aMul
-        | _ -> failwith "Unexpected pattern match"
-
-    let inv = findModuleInverse BigInteger.One BigInteger.Zero
-
-    if inv < BigInteger.Zero then inv + M else inv
-
 let rec gcd a b =
     if b = BigInteger.Zero then a else gcd b (a % b)
 
@@ -68,7 +50,7 @@ let rec gcdWithAcc a b acc : gdcAcc * BigInteger =
     let accItem = (a, a / b, b, rem)
     gcdWithAcc b rem (accItem::acc)
 
-// alternative
+// from geeksforgeeks.org
 
 // Function to find the modular inverse
 let moduleInverseFinder (M: BigInteger) (A: BigInteger) : BigInteger =
@@ -88,6 +70,28 @@ let rec gcdExtended (a: BigInteger) (b: BigInteger) : (BigInteger * BigInteger *
         let x = y1 - (b / a) * x1
         let y = x1
         (gcd, x, y)
+
+// painfully slow version
+
+let moduleInverseFinderSlow M a =
+    if M < a then failwith "First argument should be greater than the second one"
+
+    let remainder = gcd M a
+
+    if remainder <> BigInteger.One then failwith "The two numbers are not coprime"
+
+    let rec findModuleInverse classMul aMul =
+        match classMul * M + aMul * a with
+        | n when n = BigInteger.One -> aMul
+        | n when n > BigInteger.One -> findModuleInverse classMul (aMul - BigInteger.One)
+        | n when n < BigInteger.One -> findModuleInverse (classMul + BigInteger.One) aMul
+        | _ -> failwith "Unexpected pattern match"
+
+    let inv = findModuleInverse BigInteger.One BigInteger.Zero
+
+    if inv < BigInteger.Zero then inv + M else inv
+
+
 
 let measureTime f a =
     let sw = System.Diagnostics.Stopwatch()
