@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "jdpeIkCV717kQQP82rNlecvDAHOhLNajDV8PoiZIeZ/J+FzoKuBBTPnfLT7zqG3ecWEOkajhN8/P+hZ9ADNlqw==",
+  "success": true,
+  "projectFilePath": "c:\\Users\\DavWi\\OneDrive\\Desktop\\V-ProjektDateien\\Projekte\\rsa\\miniRSA.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DavWi\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}
