@@ -45,9 +45,9 @@ let moduleInverseFinderSlow M a =
     if remainder <> BigInteger.One then failwith "The two numbers are not coprime"
 
     let rec findModuleInverse classMul aMul =
-        match classMul * a + aMul * M with
+        match classMul * M + aMul * a with
         | n when n = BigInteger.One -> aMul
-        | n when n > BigInteger.One -> findModuleInverse classMul (aMul - BigInteger.One - ((n-M) / M))
+        | n when n > BigInteger.One -> findModuleInverse classMul (aMul - BigInteger.One)
         | n when n < BigInteger.One -> findModuleInverse (classMul + BigInteger.One) aMul
         | _ -> failwith "Unexpected pattern match"
 
@@ -74,7 +74,8 @@ let rec gcdWithAcc a b acc : gdcAcc * BigInteger =
 let moduleInverseFinder (M: BigInteger) (A: BigInteger) : BigInteger =
     let (g, x, _) = gcdExtended A M
     if g <> BigInteger.One then
-        raise (System.ArgumentException("Inverse doesn't exist"))
+        let errMsg = sprintf "Inverse of %s in %s doesn't exist" (A.ToString()) (M.ToString())
+        failwith errMsg
     else
         (x % M + M) % M
 
@@ -87,3 +88,11 @@ let rec gcdExtended (a: BigInteger) (b: BigInteger) : (BigInteger * BigInteger *
         let x = y1 - (b / a) * x1
         let y = x1
         (gcd, x, y)
+
+let measureTime f a =
+    let sw = System.Diagnostics.Stopwatch()
+    sw.Start()
+    let res = f a
+    sw.Stop()
+    sw.Elapsed.TotalMilliseconds
+    
